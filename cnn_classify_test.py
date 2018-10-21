@@ -49,4 +49,4 @@ with tf.Session() as sess:
     output = []
     output = tf.argmax(classification_result,1).eval()
     for i in range(len(output)):
-        print("The",i+1,"prediction:"+flower_dict[output[i]])
+        print(i+1,"prediction:"+flower_dict[output[i]])
