@@ -41,5 +41,4 @@ class userInterface():
             self
         }
         print(send_data)
-        return send_data
 
