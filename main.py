@@ -11,6 +11,8 @@ Input_bp=Input_Module_lkn.read_data('./examplebo.txt')
 Input_bo=Input_Module_lkn.read_data('./examplebp.txt')
 Input_pulse=Input_Module_lkn.read_data('./examplepul.txt')
 
+UserInterface_module.getFromData(Input_bo, Input_bp, Input_pulse)
+
 """
 Store
 """
@@ -32,11 +34,7 @@ for i in range(3):
 			data_in = [j.read(key),i]
 			alert_sys.Alert_for_three_categories_input(data_in)
 alert_sound = alert_sys.Alert_Output()
-if alert_sound != -1:
-	print("Alert ",key_words[alert_sound])
-else:
-	print("Everything is fine.")
-
+UserInterface_module.getFromAlert(alert_sound)
 """
 AI
 """
@@ -45,12 +43,9 @@ ai_sys = AiModule.AiModule()
 for j in stored_data:
 	ai_sys.input_check(Input_bo,Input_bp,Input_pulse)
 
-result=ai_sys.predict()
+predict_bo,predict_bp,predict_pul=ai_sys.predict()
 
 """
 UI
 """
-UserInterface_module.userInterface.getFromAlert(["Prediction Result:(bo,bp,pulse)",result])
-UserInterface_module.userInterface.getFromData(stored_data)
-UserInterface_module.userInterface.getFromUser()
-UserInterface_module.userInterface.sendToShow()
+UserInterface_module.getFromAI(predict_bo,predict_bp,predict_pul)

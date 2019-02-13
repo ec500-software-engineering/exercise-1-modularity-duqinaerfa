@@ -1,3 +1,4 @@
+#copyright @Wenjie Luo
 # It's the I/O documentation for Alert System
 
 # Alert Sys
@@ -13,29 +14,29 @@ class Alert():
     def exceed_threshold(self, data, tp):
         if tp == 0:
             if not 0.1 <= data <= 0.3:
-                return 0
-            else:
-                return -1
-        elif tp == 1:
-            if not 80 <= data <= 120:
                 return 1
             else:
-                return -1
-        else:
-            if not 60 <= data <= 90:
+                return 0
+        elif tp == 1:
+            if not 80 <= data <= 120:
                 return 2
             else:
-                return -1
+                return 0
+        else:
+            if not 60 <= data <= 90:
+                return 3
+            else:
+                return 0
 
     def Alert_Output(self):
         """
         Compare data with certain threthold
         send flags to user interface module.
         """
-        if self.alert_flag != -1:
+        if self.alert_flag != 0:
             return self.alert_flag
         else:
-            return -1
+            return 0
 
     def Alert_for_three_categories_input(self, data_in):
         """
@@ -55,5 +56,3 @@ class Alert():
             self.alert_flag = self.exceed_threshold(numpy.mean(self.average_list[data_in[1]]),'bp')
         if len(self.average_list[2]) > 2 and self.exceed_threshold(numpy.mean(self.average_list[2]),'pul') != -1:
             self.alert_flag = self.exceed_threshold(numpy.mean(self.average_list[data_in[1]]),'pul')
-
-

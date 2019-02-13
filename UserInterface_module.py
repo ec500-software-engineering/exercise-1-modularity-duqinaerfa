@@ -1,44 +1,30 @@
 #It's the I/O documentation for the User_Interface_system
 #Qinmei Du
 #User Interface
-class userInterface():
-    def __init__(self):
-        self.bo = []
-        self.bp = []
-        self.pul = []
-        self.boalert = []
-        self.bpalert = []
-        self.pulalert = []
-        self.operation = []
+def getFromData(bo, bp, pul):
+    """
+    Get_data_from_data_base: format:(double value, int type)
+    """
+    print ("The BO, BP, PUL is")
+    print (bo,bp, pul)
 
-    def getFromAlert(self, boalert, bpalert, pulalert):
-        """
-        Get_data_from_alert_sys:format: three flags from alert sys output to trigger alert display
-        """
-        self.boalert = boalert
-        self.bpalert = bpalert
-        self.pulalert = pulalert
+def getFromUser(operation):
+    """
+    Get_data_from_user: format: boolean control from user. Such as turn on, turn off user log in information
+    """
+    print operation
 
-    def getFromData(self, bo, bp, pul):
-        """
-        Get_data_from_data_base: format:(double value, int type)
-        """
-        self.bo = bo
-        self.bp = bp
-        self.pul = pul
+def getFromAlert(alert_number):
+    if alert_number == 0:
+        print("Everything is fine")
+    elif alert_number == 1:
+        print("BO Alert!")
+    elif alert_number == 2:
+        print("BP Alert!")
+    elif alert_number == 3:
+        print("PUL Alert!")
 
-    def getFromUser(self, operation):
-        """
-        Get_data_from_user: format: boolean control from user. Such as turn on, turn off user log in information
-        """
-        self.operation = operation
-
-    def sendToShow(self):
-        """
-        send input to electron device to show on the screen
-        """
-        send_data = {
-            self
-        }
-        print(send_data)
-
+def getFromAI(predBloodOxygen, predBloodPressure, prePulse):
+    print('predicted blood oxygen is: ' + str(predBloodOxygen))
+    print('predicted blood pressure is: ' + str(predBloodPressure))
+    print('predicted pulse is: ' + str(prePulse))
