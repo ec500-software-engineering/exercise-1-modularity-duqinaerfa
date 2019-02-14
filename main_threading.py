@@ -1,60 +1,33 @@
-from AiModule import AiModule as AI
+import Input_Module_lkn
+import Alert_module
+import AiModule
 import UserInterface_module
-import Input_Module_lkn as I
-from Alert_module import Alert
-from queue import Queue
-import threading
 import time
+import random
+import threading
 
-# from storage import storage as St
-def Input(BoQinput):
-    while True:
-        #input
-        I.rand_input(BoQinput)
-        time.sleep(2)
+def run():
+    bo = Input_Module_lkn.read_data('./examplebo.txt')
+    bp = Input_Module_lkn.read_data('./examplebp.txt')
+    pul = Input_Module_lkn.read_data('./examplepul.txt')
 
-def middle(BoQinput, BoQoutput):
-    while True:
+	robot = AiModule.AiModule()
+	robot.input_check(bo, bp, pul)
+	predBloodOxygen, predBloodPressure, prePulse = robot.predict()
 
-        if not BoQinput.empty():
-            value = BoQinput.get_nowait()
-            bo = value[0]
-            bp = value[1]
-            pul = value[2]
-            #AI
-            A = AI()
-            A.input_check(bo, bp, pul)
-            predBloodOxygen, predBloodPressure, prePulse = A.predict()
-            # Alert
-            Alt = Alert()
-            boi = bo, 0
-            bpi = bp, 1
-            puli = pul, 2
-            boa = Alt.Alert_for_three_categories_input(boi)
-            bpa = Alt.Alert_for_three_categories_input(bpi)
-            pula = Alt.Alert_for_three_categories_input(puli)
-            BoQoutput.put_nowait(value)
-            time.sleep(2)
+	Alt = Alert_module.Alert()
+	for k in range(len(bo)):
+	    boi = bo[k],0
+	    bpi = bp[k],1
+	    puli = pul[k],2
+	    boa = Alt.Alert_for_three_categories_input(boi)
+	    bpa = Alt.Alert_for_three_categories_input(bpi)
+	    pula = Alt.Alert_for_three_categories_input(puli)
 
-def Output(BoQoutput):
-    while True:
-        #Interface
-        if not BoQoutput.empty():
-            value = BoQoutput.get_nowait()
-            bo = value[0]
-            bp = value[1]
-            pul = value[2]
-            print("Blood Oxygen:%f\nBlood presure:%f\nPulse:%f\n" % (bo,bp,pul))
-            U = UserInterface_module()
-            U.getFromData(bo,bp,pul)
-            time.sleep(2)
+	User = UserInterface_module.getFromData(bo, bp, pul)
 
-if __name__ == '__main__':
-    BoQinput = Queue()
-    BoQoutput = Queue()
-    t1 = threading.Thread(target= Input, args= (BoQinput,))
-    t2 = threading.Thread(target= middle, args= (BoQinput, BoQoutput,))
-    t3 = threading.Thread(target= Output, args= (BoQoutput,))
-    t1.start()
-    t2.start()
-    t3.start()
+while True:
+	for i in range(5):
+		t = threading.Thread(target = run)
+		t.start()
+		time.sleep(random.randint(2,4))
