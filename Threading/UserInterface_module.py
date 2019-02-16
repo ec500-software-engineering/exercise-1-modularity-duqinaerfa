@@ -12,7 +12,7 @@ def getFromUser(operation):
     """
     Get_data_from_user: format: boolean control from user. Such as turn on, turn off user log in information
     """
-    print operation
+    print (operation)
 
 def getFromAlert(alert_number):
     if alert_number == 0:

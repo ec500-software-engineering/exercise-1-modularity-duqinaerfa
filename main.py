@@ -7,8 +7,8 @@ import UserInterface_module
 """
 Input
 """
-Input_bp=Input_Module_lkn.read_data('./examplebo.txt')
-Input_bo=Input_Module_lkn.read_data('./examplebp.txt')
+Input_bo=Input_Module_lkn.read_data('./examplebo.txt')
+Input_bp=Input_Module_lkn.read_data('./examplebp.txt')
 Input_pulse=Input_Module_lkn.read_data('./examplepul.txt')
 
 UserInterface_module.getFromData(Input_bo, Input_bp, Input_pulse)
