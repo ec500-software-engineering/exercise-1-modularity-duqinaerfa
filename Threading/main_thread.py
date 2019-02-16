@@ -13,7 +13,7 @@ def thread1 (input_queue,output_queue):
                 output_queue.put('exit')
                 break
             else:
-                data = Input_Module_lkn.read_data(Input)
+                data = Input_Module_lkn.read_data('./input_data.txt')
                 if data is None:
                     print("Wrong Path!")
                     continue
