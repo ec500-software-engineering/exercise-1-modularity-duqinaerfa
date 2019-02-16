@@ -8,7 +8,7 @@ import queue
 def thread1 (input_queue,output_queue):
     while True:
         try:
-            Input = input_queue.get()
+            Input = input_queue
             if Input == 'exit':
                 output_queue.put('exit')
                 break
@@ -26,7 +26,7 @@ def thread1 (input_queue,output_queue):
 def thread2(input_queue,Alert_output_queue,AI_output_queue):
     while True:
         try:
-            Input = input_queue.get()
+            Input = input_queue
             if Input == 'exit':
                 Alert_output_queue.put('exit')
                 break
@@ -52,7 +52,7 @@ def thread2(input_queue,Alert_output_queue,AI_output_queue):
 def thread3(Alert_input_queue,AI_input_queue):
     while True:
         try:
-            Input = Alert_input_queue.get()
+            Input = Alert_input_queue
             if Input == 'exit':
                 break
             else:
@@ -70,7 +70,7 @@ def thread3(Alert_input_queue,AI_input_queue):
             if Input == 'exit':
                 break
             else:
-                Input = AI_input_queue.get()
+                Input = AI_input_queue
                 predBloodOxygen, predBloodPressure, prePulse = Input[0], Input[1], Input[2]
                 print('predicted blood oxygen is: ' + str(predBloodOxygen))
                 print('predicted blood pressure is: ' + str(predBloodPressure))
