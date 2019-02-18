@@ -1,9 +1,9 @@
 #copyright @ Gang Wei
-class storage():
-    def __init__(self,data):
-        self.bo = data[0]
-        self.bp = data[1]
-        self.pul = data[2]
+class storage_thread():
+    def __init__(self, bo, bp, pul):
+        self.bo = bo
+        self.bp = bp
+        self.pul = pul
     def filter(self):
         return 0
         #for useful data

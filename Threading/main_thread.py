@@ -2,7 +2,7 @@ import Input_Module_lkn
 import Alert_module
 import AiModule
 import UserInterface_module
-import storage
+import storage_thread
 import _thread
 
 def test_func():
@@ -17,30 +17,24 @@ def main():
     ai.input_check(bo, bp, pul)
     predBloodOxygen, predBloodPressure, prePulse = ai.predict()
 
-    storage_data = zip(bo, bp, pul)
-    data_save = list(storage_data)
-    stored_data = []
-    for i in data_save:
-        tmp = storage.storage(i)
-        stored_data.append(tmp)
-
-    key_words = ['bo', 'bp', 'pul']
-    alert_sys = Alert_module.Alert()
-    for i in range(3):
-        for key in ['bo', 'bp', 'pul']:
-            for j in stored_data:
-                data_in = [j.read(key), i]
-                alert_sys.Alert_for_three_categories_input(data_in)
-    alert_sound = alert_sys.Alert_Output()
+    alt = Alert_module.Alert()
+    for k in range(len(bo)):
+        boi = bo[k], 0
+        bpi = bp[k], 1
+        puli = pul[k], 2
+        alt.Alert_for_three_categories_input(boi)
+        alt.Alert_for_three_categories_input(bpi)
+        alt.Alert_for_three_categories_input(puli)
+        alt.Alert_Output()
 
     UserInterface_module.getFromData(bo, bp, pul)
-    UserInterface_module.getFromAlert(alert_sound)
+    UserInterface_module.getFromAlert(alt.Alert_Output())
     UserInterface_module.getFromAI(predBloodOxygen,predBloodPressure,prePulse)
 
     try:
-        _thread.start_new_thread(storage.storage(data_save))
-        _thread.start_new_thread(UserInterface_module.getFromAI(predBloodOxygen,predBloodPressure,prePulse))
-        _thread.start_new_thread(UserInterface_module.getFromData(bo, bp, pul))
+        _thread.start_new_thread(storage_thread.storage_thread, (bo, bp, pul))
+        _thread.start_new_thread(UserInterface_module.getFromAI, (predBloodOxygen,predBloodPressure,prePulse))
+        _thread.start_new_thread(UserInterface_module.getFromData, (bo, bp, pul))
     except RuntimeError:
         print ("Error: unable to start thread")
 
