@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4bbd8de8-d8a3-4617-accf-8a3d74760025" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Alert_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/Alert_module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Input_Module_lkn.py" beforeDir="false" afterPath="$PROJECT_DIR$/Input_Module_lkn.py" afterDir="false" />
-    </list>
+    <list default="true" id="4bbd8de8-d8a3-4617-accf-8a3d74760025" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
